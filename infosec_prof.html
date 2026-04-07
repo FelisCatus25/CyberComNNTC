@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CyberCom | Профессия ИБ — информационная безопасность</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Orbitron', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+        }
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03050b);
+            min-height: 100vh;
+            color: #eef5ff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3rem;
+            background: rgba(10, 20, 30, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cyber-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #0ff, #2a6f8f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 26px;
+            box-shadow: 0 0 12px #0ff8;
+            color: #010101;
+        }
+        .site-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff, #0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px #0ff3;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            background: rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid cyan;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: cyan;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dropbtn:hover {
+            background: cyan;
+            color: #0a0f1e;
+            box-shadow: 0 0 15px cyan;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(8, 18, 28, 0.95);
+            backdrop-filter: blur(12px);
+            min-width: 200px;
+            border-radius: 20px;
+            border: 1px solid cyan;
+            z-index: 200;
+            right: 0;
+            top: 50px;
+        }
+        .dropdown-content a {
+            color: #eef5ff;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+            transition: 0.2s;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover {
+            background: rgba(0,255,255,0.2);
+            color: cyan;
+            padding-left: 26px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .search-box {
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 60px;
+            border: 1px solid rgba(0,255,255,0.4);
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 8px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+            width: 180px;
+        }
+        .search-box button {
+            background: none;
+            border: none;
+            color: cyan;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .hero {
+            text-align: center;
+            padding: 2rem 2rem 1rem;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffffff, #0ff, #2a7faa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .content-layout {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1300px;
+            margin: 2rem auto;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        .main-text {
+            flex: 2;
+            background: rgba(15, 25, 45, 0.55);
+            backdrop-filter: blur(8px);
+            border-radius: 42px;
+            padding: 2rem 2rem;
+            border: 1px solid rgba(0,255,255,0.35);
+            box-shadow: 0 15px 35px -8px black;
+        }
+        .sidebar {
+            flex: 1;
+            background: rgba(5, 15, 28, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 42px;
+            padding: 1.8rem;
+            border: 1px solid rgba(0,255,200,0.3);
+            height: fit-content;
+        }
+        .main-text h2 {
+            color: cyan;
+            font-size: 1.8rem;
+            margin: 1.2rem 0 0.8rem 0;
+            border-left: 4px solid cyan;
+            padding-left: 20px;
+        }
+        .main-text h2:first-of-type {
+            margin-top: 0;
+        }
+        .main-text p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        .highlight-box {
+            background: rgba(0, 255, 255, 0.08);
+            border-left: 5px solid cyan;
+            padding: 1rem 1.5rem;
+            border-radius: 28px;
+            margin: 1.5rem 0;
+        }
+        .prof-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .prof-list li {
+            margin: 1rem 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        .prof-list li::before {
+            content: "💼";
+            position: absolute;
+            left: 0;
+            color: cyan;
+        }
+        .skills-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .skills-list li {
+            margin: 0.8rem 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        .skills-list li::before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #0ff;
+        }
+        .sidebar h3 {
+            color: #0ff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar li {
+            margin: 1rem 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        .sidebar li::before {
+            content: "📌";
+            position: absolute;
+            left: 0;
+        }
+        .button-back {
+            display: inline-block;
+            background: linear-gradient(145deg, #0a1a2a, #02121f);
+            border: 1px solid cyan;
+            color: cyan;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: 0.2s;
+        }
+        .button-back:hover {
+            background: cyan;
+            color: #03050b;
+            box-shadow: 0 0 12px cyan;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #6c8db0;
+            border-top: 1px solid rgba(0,255,255,0.2);
+            margin-top: 2rem;
+        }
+        @media (max-width: 900px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .content-layout { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="logo-area">
+        <div class="cyber-icon">⚡</div>
+        <div class="site-title">CyberCom</div>
+    </div>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <div class="dropdown">
+            <button class="dropbtn">📁 Меню ▾</button>
+            <div class="dropdown-content">
+                <a href="Main.html">🏠 Главная</a>
+                <a href="phishing.html">🎣 Фишинг</a>
+                <a href="scam.html">⚠️ Мошенничество</a>
+                <a href="virus.html">🦠 Вирусы</a>
+                <a href="secure_tips.html">🔐 Советы</a>
+                <a href="infosec_prof.html">💼 Профессия ИБ</a>
+                <a href="quiz.html">📝 Тест знаний</a>
+            </div>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Поиск по кибербезопасности...">
+            <button>🔍</button>
+        </div>
+    </div>
+</div>
+<div class="hero">
+    <h1>💼 Профессия в сфере ИБ</h1>
+    <p style="margin-top: 12px;">Специалист по информационной безопасности — щит цифрового мира</p>
+</div>
+
+<div class="content-layout">
+    <div class="main-text">
+        <h2>🛡️ Кто такой специалист по ИБ?</h2>
+        <p><strong>Специалист по информационной безопасности (InfoSec)</strong> — это эксперт, который защищает цифровые активы компании или частных лиц: данные, сети, серверы, облачные системы от кибератак, утечек, вирусов и внутренних угроз. Эти профессионалы проектируют системы защиты, анализируют уязвимости, реагируют на инциденты и обучают сотрудников правилам кибергигиены.</p>
+        
+        <h2>🔐 Чем занимаются профессионалы ИБ?</h2>
+        <ul class="prof-list">
+            <li><strong>Аудит безопасности:</strong> проверяют системы на наличие уязвимостей, проводят тесты на проникновение (пентесты).</li>
+            <li><strong>Мониторинг и реагирование:</strong> 24/7 отслеживают сетевой трафик, выявляют атаки и блокируют вторжения.</li>
+            <li><strong>Разработка политик безопасности:</strong> создают регламенты, инструкции для сотрудников и системы контроля доступа.</li>
+            <li><strong>Управление инцидентами:</strong> расследуют утечки, атаки шифровальщиков, фишинговые кампании и восстанавливают системы.</li>
+            <li><strong>Защита инфраструктуры:</strong> настраивают межсетевые экраны, SIEM-системы, антивирусную защиту, DLP-решения.</li>
+            <li><strong>Обучение персонала:</strong> проводят тренинги по распознаванию фишинга, безопасной работе с почтой и паролями.</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <strong>🔥 Реальный пример работы ИБ-специалиста:</strong> В крупной компании сотрудник получил фишинговое письмо с трояном. Система SIEM зафиксировала подозрительную активность, ИБ-команда за 20 минут изолировала заражённое устройство, отключила доступ к критическим базам и запустила антивирусное сканирование сети. Атака была предотвращена, данные клиентов сохранены.
+        </div>
+
+        <h2>📈 Насколько востребована профессия ИБ?</h2>
+        <p><strong>Чрезвычайно востребована!</strong> В 2025 году дефицит специалистов по кибербезопасности в мире превышает 4 миллиона человек. В России не хватает более 50 000 профессионалов ИБ, и спрос растёт на 25–30% ежегодно. Крупные банки, ритейлеры, госструктуры, IT-компании и даже небольшие фирмы нуждаются в защите от киберугроз. Средняя зарплата начинающего специалиста ИБ — от 100 000 ₽, опытные эксперты зарабатывают 300 000+ ₽, а лиды и руководители — свыше 500 000 ₽.</p>
+        
+        <h2>🧠 Какие навыки нужны?</h2>
+        <ul class="skills-list">
+            <li>Знание сетевых протоколов (TCP/IP, DNS, HTTP/HTTPS).</li>
+            <li>Понимание ОС Windows, Linux (особенно командная строка).</li>
+            <li>Основы криптографии и аутентификации.</li>
+            <li>Работа с SIEM-системами (ArcSight, QRadar, MaxPatrol).</li>
+            <li>Навыки пентеста (Kali Linux, Metasploit, Burp Suite).</li>
+            <li>Знание нормативной базы (152-ФЗ, PCI DSS, ISO 27001).</li>
+            <li>Английский язык (для чтения документации и отчётов об уязвимостях).</li>
+        </ul>
+        
+        <p>Профессия ИБ — это не только техническая сторона, но и аналитический склад ума, стрессоустойчивость и постоянное самообучение, потому что угрозы эволюционируют каждый день.</p>
+        
+        <h2>🚀 Карьерный путь в ИБ</h2>
+        <p>Junior Security Analyst → Security Engineer → SOC Analyst → Penetration Tester → Information Security Architect → CISO (директор по информационной безопасности). Также возможны узкие специализации: GRC-аналитик, форензика (расследование инцидентов), безопасность облачных сред, AppSec (безопасность приложений).</p>
+        
+        <div class="highlight-box">
+            <strong>🌟 Почему стоит выбрать ИБ?</strong> Это одна из самых динамичных, высокооплачиваемых и социально значимых профессий XXI века. Вы становитесь цифровым супергероем, который защищает бизнесы и людей от хакеров, мошенников и утечек данных.
+        </div>
+        
+        <a href="Main.html" class="button-back">← Вернуться на главную</a>
+    </div>
+    <div class="sidebar">
+        <h3>⚡ Статистика востребованности</h3>
+        <ul>
+            <li>📊 Рынок труда ИБ вырос на 35% за последние 2 года.</li>
+            <li>💼 В России открыто >15 000 вакансий в ИБ (данные 2025 г.).</li>
+            <li>🏆 Входит в топ-5 самых высокооплачиваемых IT-профессий.</li>
+            <li>🌍 Мировой рынок кибербезопасности достигнет $300 млрд к 2026 году.</li>
+            <li>🕵️‍♂️ 68% компаний готовы нанимать джуниоров с сертификатами и курсами.</li>
+        </ul>
+        <div style="margin-top: 30px; border-top: 1px dashed cyan; padding-top: 20px;">
+            <h3>📚 Где учиться на ИБ?</h3>
+            <p>🔹 Вузы: МГТУ им. Баумана, МИФИ, ИТМО, СПбГУТ, МФТИ.<br>
+            🔹 Онлайн-курсы: Skillbox, Нетология, Stepik, OTUS, «Кибербезопасность от Яндекса».<br>
+            🔹 Сертификации: CISSP, CISM, CEH, CompTIA Security+, OSCP.<br>
+            🔹 Бесплатные ресурсы: PortSwigger Web Security Academy, TryHackMe, Hack The Box.</p>
+            <p style="margin-top: 15px;"><strong>💡 Совет:</strong> Начните с изучения сетей и Linux, затем освойте базовые инструменты пентеста. Участвуйте в CTF-соревнованиях — это лучший способ попасть в индустрию.</p>
+        </div>
+        <div style="margin-top: 20px; background: rgba(0,255,255,0.05); border-radius: 28px; padding: 15px; text-align: center;">
+            <p style="font-size: 0.95rem;">⭐ «Специалист по ИБ сегодня — это не просто технарь, а стратег, который понимает бизнес-риски и умеет коммуницировать с руководством».</p>
+        </div>
+    </div>
+</div>
+<footer>© CyberCom — всё о профессии информационной безопасности. Стань защитником цифрового мира!</footer>
+</body>
+</html>
+```

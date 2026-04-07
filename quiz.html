@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CyberCom | Тест по кибербезопасности</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Orbitron', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+        }
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03050b);
+            min-height: 100vh;
+            color: #eef5ff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3rem;
+            background: rgba(10, 20, 30, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cyber-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #0ff, #2a6f8f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 26px;
+            box-shadow: 0 0 12px #0ff8;
+            color: #010101;
+        }
+        .site-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff, #0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px #0ff3;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            background: rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid cyan;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: cyan;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dropbtn:hover {
+            background: cyan;
+            color: #0a0f1e;
+            box-shadow: 0 0 15px cyan;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(8, 18, 28, 0.95);
+            backdrop-filter: blur(12px);
+            min-width: 200px;
+            border-radius: 20px;
+            border: 1px solid cyan;
+            z-index: 200;
+            right: 0;
+            top: 50px;
+        }
+        .dropdown-content a {
+            color: #eef5ff;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+            transition: 0.2s;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover {
+            background: rgba(0,255,255,0.2);
+            color: cyan;
+            padding-left: 26px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .search-box {
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 60px;
+            border: 1px solid rgba(0,255,255,0.4);
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 8px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+            width: 180px;
+        }
+        .search-box button {
+            background: none;
+            border: none;
+            color: cyan;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .hero {
+            text-align: center;
+            padding: 2rem 2rem 1rem;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffffff, #0ff, #2a7faa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .content-layout {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .quiz-container {
+            background: rgba(15, 25, 45, 0.55);
+            backdrop-filter: blur(8px);
+            border-radius: 48px;
+            padding: 2rem;
+            border: 1px solid rgba(0,255,255,0.35);
+            box-shadow: 0 20px 35px -10px black;
+        }
+        .question-block {
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+        }
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #c0f0ff;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            padding-left: 1rem;
+        }
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: 0.1s;
+        }
+        input[type="radio"] {
+            accent-color: cyan;
+            width: 18px;
+            height: 18px;
+        }
+        .submit-area {
+            text-align: center;
+            margin: 2rem 0 1rem;
+        }
+        .submit-btn {
+            background: linear-gradient(145deg, #0a1a2a, #02121f);
+            border: 2px solid cyan;
+            color: cyan;
+            padding: 14px 40px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .submit-btn:hover {
+            background: cyan;
+            color: #03050b;
+            box-shadow: 0 0 20px cyan;
+            transform: scale(1.02);
+        }
+        .result-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 20, 30, 0.7);
+            border-radius: 36px;
+            text-align: center;
+            border-left: 6px solid cyan;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .result-score {
+            font-size: 2rem;
+            color: #0ff;
+            margin: 0.5rem 0;
+        }
+        .button-back {
+            display: inline-block;
+            background: linear-gradient(145deg, #0a1a2a, #02121f);
+            border: 1px solid cyan;
+            color: cyan;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            transition: 0.2s;
+        }
+        .button-back:hover {
+            background: cyan;
+            color: #03050b;
+            box-shadow: 0 0 12px cyan;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #6c8db0;
+            border-top: 1px solid rgba(0,255,255,0.2);
+            margin-top: 2rem;
+        }
+        @media (max-width: 800px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .question-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="logo-area">
+        <div class="cyber-icon">⚡</div>
+        <div class="site-title">CyberCom</div>
+    </div>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <div class="dropdown">
+            <button class="dropbtn">📁 Меню ▾</button>
+            <div class="dropdown-content">
+                <a href="Main.html">🏠 Главная</a>
+                <a href="phishing.html">🎣 Фишинг</a>
+                <a href="scam.html">⚠️ Мошенничество</a>
+                <a href="virus.html">🦠 Вирусы</a>
+                <a href="secure_tips.html">🔐 Советы</a>
+                <a href="infosec_prof.html">💼 Профессия ИБ</a>
+                <a href="quiz.html">📝 Тест знаний</a>
+            </div>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Поиск по кибербезопасности...">
+            <button>🔍</button>
+        </div>
+    </div>
+</div>
+<div class="hero">
+    <h1>📝 Проверь свои знания</h1>
+    <p style="margin-top: 12px;">Тест из 10 вопросов по кибербезопасности. Ответь и узнай свой уровень!</p>
+</div>
+<div class="content-layout">
+    <div class="quiz-container">
+        <form id="cyberQuiz">
+            <!-- Вопрос 1: Фишинг -->
+            <div class="question-block">
+                <div class="question-text">1. Что такое фишинг?</div>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="0"> А) Метод ускорения работы интернета</label>
+                    <label><input type="radio" name="q1" value="1"> Б) Вид мошенничества для кражи личных данных через поддельные сайты/письма</label>
+                    <label><input type="radio" name="q1" value="0"> В) Антивирусная программа</label>
+                    <label><input type="radio" name="q1" value="0"> Г) Сетевое оборудование</label>
+                </div>
+            </div>
+            <!-- Вопрос 2: Признак фишинга -->
+            <div class="question-block">
+                <div class="question-text">2. Какой признак чаще всего указывает на фишинговое письмо?</div>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="0"> А) Обращение по имени</label>
+                    <label><input type="radio" name="q2" value="1"> Б) Требование срочных действий и ссылка на подозрительный домен</label>
+                    <label><input type="radio" name="q2" value="0"> В) Наличие логотипа компании</label>
+                    <label><input type="radio" name="q2" value="0"> Г) Длинный текст с подробностями</label>
+                </div>
+            </div>
+            <!-- Вопрос 3: Мошенничество в интернете -->
+            <div class="question-block">
+                <div class="question-text">3. Что из перечисленного является схемой интернет-мошенничества?</div>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="0"> А) Двухфакторная аутентификация</label>
+                    <label><input type="radio" name="q3" value="0"> Б) Регулярное обновление паролей</label>
+                    <label><input type="radio" name="q3" value="1"> В) Звонок из «банка» с требованием перевести деньги на безопасный счёт</label>
+                    <label><input type="radio" name="q3" value="0"> Г) Использование менеджера паролей</label>
+                </div>
+            </div>
+            <!-- Вопрос 4: Защита от мошенников -->
+            <div class="question-block">
+                <div class="question-text">4. Как правильно поступить при звонке «сотрудника банка» о подозрительной операции?</div>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="1"> А) Положить трубку и перезвонить в банк по официальному номеру</label>
+                    <label><input type="radio" name="q4" value="0"> Б) Назвать код из СМС для проверки</label>
+                    <label><input type="radio" name="q4" value="0"> В) Перевести деньги на указанный счёт</label>
+                    <label><input type="radio" name="q4" value="0"> Г) Сообщить CVV карты</label>
+                </div>
+            </div>
+            <!-- Вопрос 5: Вирусы -->
+            <div class="question-block">
+                <div class="question-text">5. Какой тип вируса шифрует файлы и требует выкуп?</div>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="0"> А) Троян</label>
+                    <label><input type="radio" name="q5" value="1"> Б) Шифровальщик (Ransomware)</label>
+                    <label><input type="radio" name="q5" value="0"> В) Червь</label>
+                    <label><input type="radio" name="q5" value="0"> Г) Шпионское ПО</label>
+                </div>
+            </div>
+            <!-- Вопрос 6: Защита от вирусов -->
+            <div class="question-block">
+                <div class="question-text">6. Что из перечисленного НЕ является эффективной защитой от вирусов?</div>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="0"> А) Регулярное обновление антивируса</label>
+                    <label><input type="radio" name="q6" value="0"> Б) Резервное копирование данных</label>
+                    <label><input type="radio" name="q6" value="1"> В) Отключение брандмауэра для ускорения работы</label>
+                    <label><input type="radio" name="q6" value="0"> Г) Установка обновлений ОС</label>
+                </div>
+            </div>
+            <!-- Вопрос 7: Профессия ИБ -->
+            <div class="question-block">
+                <div class="question-text">7. Чем занимаются специалисты по информационной безопасности (ИБ)?</div>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="0"> А) Созданием видеоигр</label>
+                    <label><input type="radio" name="q7" value="1"> Б) Защитой данных, сетей и систем от киберугроз</label>
+                    <label><input type="radio" name="q7" value="0"> В) Дизайном веб-сайтов</label>
+                    <label><input type="radio" name="q7" value="0"> Г) Продвижением в соцсетях</label>
+                </div>
+            </div>
+            <!-- Вопрос 8: Романтическое мошенничество -->
+            <div class="question-block">
+                <div class="question-text">8. Как распознать романтическое мошенничество на сайте знакомств?</div>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="0"> А) Человек сразу предлагает встретиться</label>
+                    <label><input type="radio" name="q8" value="1"> Б) Быстрое признание в любви и просьба денег на лечение / билеты</label>
+                    <label><input type="radio" name="q8" value="0"> В) Присылает много фотографий</label>
+                    <label><input type="radio" name="q8" value="0"> Г) Интересуется хобби</label>
+                </div>
+            </div>
+            <!-- Вопрос 9: Лучшая защита от фишинга -->
+            <div class="question-block">
+                <div class="question-text">9. Что лучше всего поможет избежать фишинга?</div>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="0"> А) Использование сложного пароля</label>
+                    <label><input type="radio" name="q9" value="1"> Б) Проверка адреса сайта вручную и игнорирование подозрительных ссылок</label>
+                    <label><input type="radio" name="q9" value="0"> В) Регулярная перезагрузка роутера</label>
+                    <label><input type="radio" name="q9" value="0"> Г) Установка всех расширений браузера</label>
+                </div>
+            </div>
+            <!-- Вопрос 10: Безопасная привычка -->
+            <div class="question-block">
+                <div class="question-text">10. Какая привычка помогает защититься от мошенников и вирусов?</div>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="0"> А) Использовать один пароль для всех сервисов</label>
+                    <label><input type="radio" name="q10" value="1"> Б) Включить двухфакторную аутентификацию и регулярно делать бэкапы</label>
+                    <label><input type="radio" name="q10" value="0"> В) Открывать все вложения из писем</label>
+                    <label><input type="radio" name="q10" value="0"> Г) Отключать антивирус для увеличения скорости</label>
+                </div>
+            </div>
+
+            <div class="submit-area">
+                <button type="button" class="submit-btn" id="checkResults">✅ Проверить результаты</button>
+            </div>
+        </form>
+
+        <div id="resultDisplay" class="result-box" style="display: none;">
+            <div>🏆 Ваш результат</div>
+            <div id="scoreValue" class="result-score">0 / 10</div>
+            <div id="scoreMessage">Попробуйте ещё раз и изучите материалы!</div>
+            <a href="Main.html" class="button-back">📘 Изучить страницы</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const correctAnswers = {
+            q1: "1", q2: "1", q3: "1", q4: "1", q5: "1",
+            q6: "1", q7: "1", q8: "1", q9: "1", q10: "1"
+        };
+
+        const messages = {
+            low: "🔴 Вам стоит повторить материалы о фишинге, мошенничестве и вирусах!",
+            medium: "🟡 Неплохо, но есть пробелы. Перечитайте разделы для полной защиты!",
+            high: "🟢 Отлично! Вы хорошо разбираетесь в кибербезопасности. Так держать!",
+            perfect: "🏅 Превосходно! Вы настоящий эксперт по кибербезопасности!"
+        };
+
+        const resultDiv = document.getElementById('resultDisplay');
+        const scoreSpan = document.getElementById('scoreValue');
+        const messageDiv = document.getElementById('scoreMessage');
+
+        window.checkQuiz = function() {
+            let score = 0;
+            for (let i = 1; i <= 10; i++) {
+                const qName = `q${i}`;
+                const selected = document.querySelector(`input[name="${qName}"]:checked`);
+                if (selected && selected.value === correctAnswers[qName]) {
+                    score++;
+                }
+            }
+
+            scoreSpan.innerText = `${score} / 10`;
+            
+            if (score <= 3) {
+                messageDiv.innerHTML = messages.low + " <br> Изучите страницы: Фишинг, Мошенничество, Вирусы, ИБ.";
+            } else if (score <= 6) {
+                messageDiv.innerHTML = messages.medium + " <br> Рекомендуем перечитать разделы о защите и профилактике.";
+            } else if (score <= 9) {
+                messageDiv.innerHTML = messages.high + " <br> Вы на верном пути, но есть куда расти!";
+            } else {
+                messageDiv.innerHTML = messages.perfect + " <br> Вы мастер кибербезопасности!";
+            }
+            
+            resultDiv.style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        };
+
+        const btn = document.getElementById('checkResults');
+        if (btn) {
+            btn.addEventListener('click', window.checkQuiz);
+        }
+    })();
+</script>
+<footer>© CyberCom — тест на знание киберугроз. Будьте в безопасности!</footer>
+</body>
+</html>
+```

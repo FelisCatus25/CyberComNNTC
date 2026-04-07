@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CyberCom | Главная страница</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Orbitron', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+        }
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03050b);
+            min-height: 100vh;
+            color: #eef5ff;
+        }
+        /* выплывающее меню + поиск */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3rem;
+            background: rgba(10, 20, 30, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cyber-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #0ff, #2a6f8f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 26px;
+            box-shadow: 0 0 12px #0ff8;
+            color: #010101;
+        }
+        .site-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff, #0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px #0ff3;
+        }
+        /* выплывающее меню */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            background: rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid cyan;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: cyan;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dropbtn:hover {
+            background: cyan;
+            color: #0a0f1e;
+            box-shadow: 0 0 15px cyan;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(8, 18, 28, 0.95);
+            backdrop-filter: blur(12px);
+            min-width: 200px;
+            border-radius: 20px;
+            border: 1px solid cyan;
+            z-index: 200;
+            right: 0;
+            top: 50px;
+        }
+        .dropdown-content a {
+            color: #eef5ff;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+            transition: 0.2s;
+        }
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content a:hover {
+            background: rgba(0,255,255,0.2);
+            color: cyan;
+            padding-left: 26px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .search-box {
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 60px;
+            border: 1px solid rgba(0,255,255,0.4);
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 8px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+            width: 180px;
+        }
+        .search-box button {
+            background: none;
+            border: none;
+            color: cyan;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ffffff, #0ff, #2a7faa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .info-card {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: rgba(15, 25, 45, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 48px;
+            padding: 2rem;
+            border: 1px solid rgba(0,255,255,0.3);
+            box-shadow: 0 20px 35px -10px black;
+        }
+        .info-card p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+        .nav-btn {
+            background: linear-gradient(145deg, #0a1a2a, #02121f);
+            border: 1px solid cyan;
+            color: cyan;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+        .nav-btn:hover {
+            background: cyan;
+            color: #03050b;
+            transform: scale(1.02);
+            box-shadow: 0 0 18px cyan;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #6c8db0;
+            border-top: 1px solid rgba(0,255,255,0.2);
+            margin-top: 2rem;
+        }
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 15px; align-items: stretch; }
+            .dropdown-content { right: auto; left: 0; }
+            .search-box { justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="logo-area">
+        <div class="cyber-icon">⚡</div>
+        <div class="site-title">CyberCom</div>
+    </div>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <div class="dropdown">
+            <button class="dropbtn">📁 Меню ▾</button>
+            <div class="dropdown-content">
+                <a href="index.html">🏠 Главная</a>
+                <a href="phishing.html">🎣 Фишинг</a>
+                <a href="scam.html">⚠️ Мошенничество</a>
+                <a href="virus.html">🦠 Вирусы</a>
+                <a href="secure_tips.html">🔐 Советы</a>
+                <a href="infosec_prof.html">💼 Профессия ИБ</a>
+                <a href="quiz.html">📝 Тест знаний</a>
+            </div>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Поиск по кибербезопасности...">
+            <button>🔍</button>
+        </div>
+    </div>
+</div>
+<div class="hero">
+    <h1>CyberCom — твой щит в сети</h1>
+    <p style="font-size: 1.2rem; margin-top: 10px;">Безопасность, осознанность, защита данных</p>
+</div>
+<div class="info-card">
+    <p><strong>CyberCom</strong> — платформа о современных угрозах интернета и методах защиты. Мы помогаем разобраться в фишинге, интернет-мошенничестве, вредоносном ПО, а также рассказываем о профессии специалиста по информационной безопасности. Наша миссия — сделать цифровой мир безопаснее для каждого.</p>
+    <p>Изучите разделы с помощью кнопок ниже, пройдите тест и повысьте свою киберграмотность!</p>
+</div>
+<div class="button-grid">
+    <a href="phishing.html" class="nav-btn">🎣 Фишинг</a>
+    <a href="scam.html" class="nav-btn">⚠️ Мошенничество</a>
+    <a href="virus.html" class="nav-btn">🦠 Вирусы</a>
+    <a href="secure_tips.html" class="nav-btn">🔐 Безопасные привычки</a>
+    <a href="infosec_prof.html" class="nav-btn">💼 Профессия ИБ</a>
+    <a href="quiz.html" class="nav-btn">📝 Пройти тест</a>
+</div>
+<footer>© CyberCom — защита данных и цифровая гигиена | Все материалы носят образовательный характер</footer>
+</body>
+</html>
